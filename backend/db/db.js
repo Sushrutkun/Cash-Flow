@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
-// let MONGO_URL="mongodb+srv://admin:admin@admindash.uzzw6rq.mongodb.net/?retryWrites=true&w=majority";
+// const mongoose = require('mongoose');
+import mongoose from "mongoose"
 
 const db = async () => {
     try {
         mongoose.set('strictQuery', false)
         await mongoose.connect(process.env.MONGO_URL)
-        console.log('Db Connected')
+        console.log('Db Connected Sucessfully')
     } catch (error) {
-        console.log('DB Connection Error');
+        console.log('DB Connection Error',error);
     }
 }
-
-module.exports = {db}
+export default db;
+// module.exports = {db}

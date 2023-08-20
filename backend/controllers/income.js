@@ -1,7 +1,7 @@
-const IncomeSchema= require("../models/IncomeModel")
+// const IncomeSchema= require("../models/IncomeModel")
+import IncomeSchema from "../models/IncomeModel.js"
 
-
-exports.addIncome = async (req, res) => {
+export const addIncome = async (req, res) => {
     const {title, amount, category, description, date}  = req.body
 
     const income = IncomeSchema({
@@ -29,7 +29,7 @@ exports.addIncome = async (req, res) => {
     console.log(income)
 }
 
-exports.getIncomes = async (req, res) =>{
+export const getIncomes = async (req, res) =>{
     try {
         const incomes = await IncomeSchema.find().sort({createdAt: -1})
         res.status(200).json(incomes)
@@ -38,7 +38,7 @@ exports.getIncomes = async (req, res) =>{
     }
 }
 
-exports.deleteIncome = async (req, res) =>{
+export const deleteIncome = async (req, res) =>{
     const {id} = req.params;
     IncomeSchema.findByIdAndDelete(id)
         .then((income) =>{
