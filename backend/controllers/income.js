@@ -63,7 +63,6 @@ export const changeIncome = async (req, res) =>{
     console.log(title);
     IncomeSchema.findByIdAndUpdate(id,updatedIncome ,{ new: true })
         .then((updatedIncome ) =>{
-            // const incomes =  IncomeSchema.find().sort({createdAt: -1})
             res.status(200).json({message: 'Income Editted'})
         })
         .catch((err) =>{

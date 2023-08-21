@@ -15,6 +15,3 @@ router
     .patch('/edit-income/:id',changeIncome)
     .patch('/edit-expense/:id',changeExpense);
 export default router;
-
-
-// module.exports = router

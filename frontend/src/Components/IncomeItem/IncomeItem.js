@@ -15,9 +15,7 @@ function IncomeItem({
     editItem,
     indicatorColor,
     type,
-    // setEditi
 }) {
-    // const [editi,setEditi]=useState(false);
     const categoryIcon = () =>{
         switch(category) {
             case 'salary':
@@ -64,8 +62,6 @@ function IncomeItem({
         }
     }
 
-    // console.log('type', type)
-
     return (
         <IncomeItemStyled indicator={indicatorColor}>
             <div className="icon">
@@ -91,12 +87,7 @@ function IncomeItem({
                             color={'#fff'}
                             iColor={'#fff'}
                             hColor={'var(--color-green)'}
-                            onClick={() => {
-                                editItem(id);
-                                // setEditi(true);
-                                }
-                            }
-                            // create a edit item code
+                            onClick={() => editItem(id)}
                         />
                         <Button 
                             icon={trash}

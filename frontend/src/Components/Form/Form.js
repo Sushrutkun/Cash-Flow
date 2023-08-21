@@ -16,7 +16,6 @@ function Form() {
         category: '',
         description: 'New Income',  
     })
-    // console.log(edit_data);
 
 
     const handleEdit = e => {
