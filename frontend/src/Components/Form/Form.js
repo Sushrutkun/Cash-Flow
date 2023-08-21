@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,32 +8,67 @@ import { plus } from '../../utils/Icons';
 
 
 function Form() {
-    const {addIncome, getIncomes, error, setError} = useGlobalContext()
+    const {addIncome, error, setError,setEditi,editi,edit_data,changeIncome} = useGlobalContext()
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
-        date: '',
+        date: new Date(),
         category: '',
-        description: '',
+        description: 'New Income',  
     })
+    // console.log(edit_data);
 
+
+    const handleEdit = e => {
+        if(editi){
+            console.log(edit_data);
+            const { title, amount, date, category, description } = edit_data;
+            // console.log(title);
+            setInputState({
+                title,
+                amount,
+                date: new Date(date),
+                category,
+                description
+            });
+        }
+    }
+
+    useEffect(()=>{
+        handleEdit();
+    },[editi])
+    
     const { title, amount, date, category,description } = inputState;
-
+    
     const handleInput = name => e => {
         setInputState({...inputState, [name]: e.target.value})
         setError('')
     }
-
+    
     const handleSubmit = e => {
         e.preventDefault()
-        addIncome(inputState)
-        setInputState({
-            title: '',
-            amount: '',
-            date: '',
-            category: '',
-            description: '',
-        })
+        if(editi){
+            console.log(inputState);
+            changeIncome(edit_data._id,inputState);
+            setEditi(false);
+            setInputState({
+                title: '',
+                amount: '',
+                date: new Date(),
+                category: '',
+                description: 'New Income',
+            })
+        }
+        else{
+            addIncome(inputState)
+            setInputState({
+                title: '',
+                amount: '',
+                date: new Date(),
+                category: '',
+                description: 'New Income',
+            })
+        }
     }
 
     return (
@@ -69,7 +104,7 @@ function Form() {
             </div>
             <div className="selects input-control">
                 <select required value={category} name="category" id="category" onChange={handleInput('category')}>
-                    <option value=""  disabled >Select Option</option>
+                    <option value="" disabled >Select Option</option>
                     <option value="salary">Salary</option>
                     <option value="freelancing">Freelancing</option>
                     <option value="investments">Investiments</option>

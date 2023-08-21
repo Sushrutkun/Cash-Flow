@@ -12,6 +12,8 @@ export const GlobalProvider = ({children}) => {
     const [incomes, setIncomes] = useState([])
     const [expenses, setExpenses] = useState([])
     const [error, setError] = useState(null)
+    const [editi,setEditi]=useState(false)
+    const [edit_data, setEditData] = useState(null);
 
     //calculate incomes
     const addIncome = async (income) => {
@@ -30,6 +32,30 @@ export const GlobalProvider = ({children}) => {
 
     const deleteIncome = async (id) => {
         const res  = await axios.delete(`${BASE_URL}delete-income/${id}`)
+        getIncomes()
+    }
+
+    const editIncome = async (id) => {
+        const response = await axios.get(`${BASE_URL}get-incomes`)
+        // const json_data=await response.data;
+        const random_data=response.data.find(item => item._id === id);
+        // setIncomes()
+        setEditi(true);
+        if (random_data) {
+            console.log(random_data);
+            setEditData(random_data);
+            // return edit_data;
+        } else {
+        console.log("Data with the specified ID not found.");
+        // return null;
+        }
+    }
+
+    const changeIncome = async(id,income) =>{
+        const response = await axios.patch(`${BASE_URL}/edit-expense/${id}`,income)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
         getIncomes()
     }
 
@@ -101,8 +127,15 @@ export const GlobalProvider = ({children}) => {
             totalExpenses,
             totalBalance,
             transactionHistory,
+            editIncome,
+            // editExpense,
             error,
-            setError
+            setError,
+            setEditi,
+            editi,
+            edit_data
+            ,
+            changeIncome
         }}>
             {children}
         </GlobalContext.Provider>

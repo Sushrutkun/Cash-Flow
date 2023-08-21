@@ -12,9 +12,9 @@ function ExpenseForm() {
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
-        date: '',
+        date: new Date(),
         category: '',
-        description: '',
+        description: 'New Expense',
     })
 
     const { title, amount, date, category,description } = inputState;
@@ -30,9 +30,9 @@ function ExpenseForm() {
         setInputState({
             title: '',
             amount: '',
-            date: '',
+            date: new Date(),
             category: '',
-            description: '',
+            description: 'New Expense',
         })
     }
 

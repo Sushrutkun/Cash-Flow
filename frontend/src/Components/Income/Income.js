@@ -6,7 +6,7 @@ import Form from '../Form/Form';
 import IncomeItem from '../IncomeItem/IncomeItem';
 
 function Income() {
-    const {addIncome,incomes, getIncomes, deleteIncome, totalIncome} = useGlobalContext()
+    const {addIncome,incomes, getIncomes, deleteIncome, editIncome,totalIncome} = useGlobalContext()
 
     useEffect(() =>{
         getIncomes()
@@ -18,8 +18,11 @@ function Income() {
                 <h2 className="total-income">Total Income: <span>${totalIncome()}</span></h2>
                 <div className="income-content">
                     <div className="form-container">
+                        {/* creating the form */}
                         <Form />
                     </div>
+
+                    {/* using the re use feature of react creating right expense chart */}
                     <div className="incomes">
                         {incomes.map((income) => {
                             const {_id, title, amount, date, category, description, type} = income;
@@ -34,6 +37,7 @@ function Income() {
                                 category={category} 
                                 indicatorColor="var(--color-green)"
                                 deleteItem={deleteIncome}
+                                editItem={editIncome}
                             />
                         })}
                     </div>

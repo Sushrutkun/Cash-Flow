@@ -21,21 +21,23 @@ function Dashboard() {
                 <div className="stats-con">
                     <div className="chart-con">
                         <Chart />
+                        {/* calling for chart */}
                         <div className="amount-con">
                             <div className="income">
-                                <h2>Total Income</h2>
+                                <h3>Total Income</h3>
                                 <p>
                                     {dollar} {totalIncome()}
                                 </p>
                             </div>
                             <div className="expense">
-                                <h2>Total Expense</h2>
+                                <h3>Total Expense</h3>
                                 <p>
                                     {dollar} {totalExpenses()}
                                 </p>
                             </div>
                             <div className="balance">
                                 <h2>Total Balance</h2>
+                                {/* <p totalBalanceProp={totalBalance()>0 ? 'green':'red'}> */}
                                 <p>
                                     {dollar} {totalBalance()}
                                 </p>
@@ -92,8 +94,20 @@ const DashboardStyled = styled.div`
                     border-radius: 20px;
                     padding: 1rem;
                     p{
-                        font-size: 3.5rem;
+                        font-size: 3rem;
                         font-weight: 700;
+                    }
+                }
+                .income{
+                    p{
+                        color:var(--color-green);
+                        opacity: 0.8;
+                    }
+                }
+                .expense{
+                    p{
+                        color:red;
+                        opacity: 0.8;
                     }
                 }
 
@@ -105,8 +119,8 @@ const DashboardStyled = styled.div`
                     align-items: center;
                     p{
                         color: var(--color-green);
-                        opacity: 0.6;
-                        font-size: 4.5rem;
+                        opacity: 1;
+                        font-size: 3rem;
                     }
                 }
             }
@@ -118,7 +132,7 @@ const DashboardStyled = styled.div`
                 margin: 1rem 0;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: space-around;
             }
             .salary-title{
                 font-size: 1.2rem;
@@ -145,3 +159,5 @@ const DashboardStyled = styled.div`
 `;
 
 export default Dashboard
+
+// color: ${props=>props.totalBalance>0 ? 'var(--color-green)':'red'};

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import avatar from '../../img/avatar.png'
 import { signout } from '../../utils/Icons'
@@ -12,7 +12,7 @@ function Navigation({active, setActive}) {
                 <img src={avatar} alt="" />
                 <div className="text">
                     <h2>Mike</h2>
-                    <p>Your Money</p>
+                    <p>Cash Flow</p>
                 </div>
             </div>
             <ul className="menu-items">
@@ -30,6 +30,7 @@ function Navigation({active, setActive}) {
             <div className="bottom-nav">
                 <li>
                     {signout} Sign Out
+                    {/* create a href or button heer to signout  */}
                 </li>
             </div>
         </NavStyled>

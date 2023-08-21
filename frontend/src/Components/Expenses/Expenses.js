@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../context/globalContext';
 import { InnerLayout } from '../../styles/Layouts';
-import Form from '../Form/Form';
+// import Form from '../Form/Form';
 import IncomeItem from '../IncomeItem/IncomeItem';
 import ExpenseForm from './ExpenseForm';
 
 function Expenses() {
-    const {addIncome,expenses, getExpenses, deleteExpense, totalExpenses} = useGlobalContext()
+    const {addIncome,expenses, getExpenses, deleteExpense, editExpense,totalExpenses} = useGlobalContext()
 
     useEffect(() =>{
         getExpenses()
@@ -34,8 +34,9 @@ function Expenses() {
                                 date={date} 
                                 type={type}
                                 category={category} 
-                                indicatorColor="var(--color-green)"
+                                indicatorColor="red"
                                 deleteItem={deleteExpense}
+                                editItem={editExpense}
                             />
                         })}
                     </div>
@@ -63,7 +64,8 @@ const ExpenseStyled = styled.div`
         span{
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--color-green);
+            
+            color: red;
         }
     }
     .income-content{

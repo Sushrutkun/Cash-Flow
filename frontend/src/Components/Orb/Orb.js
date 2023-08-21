@@ -33,7 +33,7 @@ function Orb() {
     `;
 
     return (
-        <OrbStyled></OrbStyled>
+        <OrbStyled/>
     )
 }
 

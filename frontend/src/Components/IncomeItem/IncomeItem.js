@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { dateFormat } from '../../utils/dateFormat';
-import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt } from '../../utils/Icons';
+import { bitcoin, book, calender, card, circle, clothing, comment, dollar, edit,food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt} from '../../utils/Icons';
 import Button from '../Button/Button';
 
 function IncomeItem({
@@ -12,10 +12,12 @@ function IncomeItem({
     category,
     description,
     deleteItem,
+    editItem,
     indicatorColor,
-    type
-}) {
+    type,
 
+}) {
+    // const [editi,setEditi]=useState(false);
     const categoryIcon = () =>{
         switch(category) {
             case 'salary':
@@ -62,7 +64,7 @@ function IncomeItem({
         }
     }
 
-    console.log('type', type)
+    // console.log('type', type)
 
     return (
         <IncomeItemStyled indicator={indicatorColor}>
@@ -80,7 +82,22 @@ function IncomeItem({
                             {description}
                         </p>
                     </div>
-                    <div className="btn-con">
+                    <div className="btn-con" style={{display:"flex" ,gap:"5px"}}>
+                        <Button 
+                            icon={edit}
+                            bPad={'1rem'}
+                            bRad={'50%'}
+                            bg={'var(--primary-color'}
+                            color={'#fff'}
+                            iColor={'#fff'}
+                            hColor={'var(--color-green)'}
+                            onClick={() => {
+                                editItem(id);
+                                // setEditi(true);
+                                }
+                            }
+                            // create a edit item code
+                        />
                         <Button 
                             icon={trash}
                             bPad={'1rem'}

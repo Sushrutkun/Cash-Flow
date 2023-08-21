@@ -1,8 +1,8 @@
-import React, {useState, useMemo} from 'react'
+import React, {useState} from 'react'
 import styled from "styled-components";
 import bg from './img/bg.png'
 import {MainLayout} from './styles/Layouts'
-import Orb from './Components/Orb/Orb'
+// import Orb from './Components/Orb/Orb'
 import Navigation from './Components/Navigation/Navigation'
 import Dashboard from './Components/Dashboard/Dashboard';
 import Income from './Components/Income/Income'
@@ -13,7 +13,7 @@ function App() {
   const [active, setActive] = useState(1)
 
   const global = useGlobalContext()
-  console.log(global);
+  // console.log(global);
 
   const displayData = () => {
     switch(active){
@@ -30,13 +30,14 @@ function App() {
     }
   }
 
-  const orbMemo = useMemo(() => {
-    return <Orb />
-  },[])
+  // const orbMemo = useMemo(() => {
+  //   return <Orb />
+  // },[])
 
   return (
     <AppStyled bg={bg} className="App">
-      {orbMemo}
+      {/* {orbMemo} */}
+      {/* removing orb as animation in css is used in it of no use */}
       <MainLayout>
         <Navigation active={active} setActive={setActive} />
         <main>
