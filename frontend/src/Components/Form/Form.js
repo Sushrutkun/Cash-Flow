@@ -24,7 +24,6 @@ function Form() {
         if(editi){
             console.log(edit_data);
             const { title, amount, date, category, description } = edit_data;
-            // console.log(title);
             setInputState({
                 title,
                 amount,
@@ -32,7 +31,6 @@ function Form() {
                 category,
                 description
             });
-            // setEditi(false);
         }
     }
 

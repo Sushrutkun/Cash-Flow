@@ -14,6 +14,8 @@ export const GlobalProvider = ({children}) => {
     const [error, setError] = useState(null)
     const [editi,setEditi]=useState(false)
     const [edit_data, setEditData] = useState(null);
+    const [edite,setEdite]=useState(false)
+    const [edit_data_e, setEditDatae] = useState(null);
 
     //calculate incomes
     const addIncome = async (income) => {
@@ -37,27 +39,42 @@ export const GlobalProvider = ({children}) => {
 
     const editIncome = async (id) => {
         const response = await axios.get(`${BASE_URL}get-incomes`)
-        // const json_data=await response.data;
         const random_data=response.data.find(item => item._id === id);
-        // setIncomes()
-        // setEditi(false);
         setEditi(true);
         if (random_data) {
             console.log(random_data);
             setEditData(random_data);
-            // return edit_data;
         } else {
         console.log("Data with the specified ID not found.");
-        // return null;
+        }
+    }
+
+    const editExpense = async (id) => {
+        const response = await axios.get(`${BASE_URL}get-expenses`)
+        const random_data=response.data.find(item => item._id === id);
+        setEdite(true);
+        if (random_data) {
+            console.log(random_data);
+            setEditDatae(random_data);
+        } else {
+        console.log("Data with the specified ID not found.");
         }
     }
 
     const changeIncome = async(id,income) =>{
-        const response = await axios.patch(`${BASE_URL}/edit-expense/${id}`,income)
+        const response = await axios.patch(`${BASE_URL}/edit-income/${id}`,income)
             .catch((err) =>{
                 setError(err.response.data.message)
             })
         getIncomes()
+    }
+
+    const changeExpense = async(id,expense) =>{
+        const response = await axios.patch(`${BASE_URL}/edit-expense/${id}`,expense)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
+        getExpenses()
     }
 
     const totalIncome = () => {
@@ -129,14 +146,17 @@ export const GlobalProvider = ({children}) => {
             totalBalance,
             transactionHistory,
             editIncome,
-            // editExpense,
+            editExpense,
             error,
             setError,
             setEditi,
             editi,
-            edit_data
-            ,
-            changeIncome
+            edit_data,
+            changeIncome,
+            edit_data_e,
+            setEdite,
+            edite,
+            changeExpense
         }}>
             {children}
         </GlobalContext.Provider>

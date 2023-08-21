@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,7 +8,7 @@ import { plus } from '../../utils/Icons';
 
 
 function ExpenseForm() {
-    const {addExpense, error, setError} = useGlobalContext()
+    const {addExpense, error, setError,edite,edit_data_e,setEdite,changeExpense} = useGlobalContext()
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
@@ -17,7 +17,27 @@ function ExpenseForm() {
         description: 'New Expense',
     })
 
-    const { title, amount, date, category,description } = inputState;
+    const { title, amount, date, category,description} = inputState;
+
+
+    const handleEdit = e => {
+
+        if(edite){
+            console.log(edit_data_e);
+            const { title, amount, date, category, description } = edit_data_e;
+            setInputState({
+                title,
+                amount,
+                date: new Date(date),
+                category,
+                description
+            });
+        }
+    }
+
+    useEffect(()=>{
+        handleEdit();
+    },[edite])
 
     const handleInput = name => e => {
         setInputState({...inputState, [name]: e.target.value})
@@ -26,14 +46,29 @@ function ExpenseForm() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        addExpense(inputState)
-        setInputState({
-            title: '',
-            amount: '',
-            date: new Date(),
-            category: '',
-            description: 'New Expense',
-        })
+        if(edite){
+            console.log(inputState);
+            changeExpense(edit_data_e._id,inputState);
+            setEdite(false);
+            setInputState({
+                title: '',
+                amount: '',
+                date: new Date(),
+                category: '',
+                description: 'New Expense',
+            })
+        }
+        else
+        {
+            addExpense(inputState)
+            setInputState({
+                title: '',
+                amount: '',
+                date: new Date(),
+                category: '',
+                description: 'New Expense',
+            })
+        }
     }
 
     return (

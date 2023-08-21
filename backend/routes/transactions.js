@@ -1,4 +1,4 @@
-import { addExpense, getExpense, deleteExpense } from '../controllers/expense.js';
+import { addExpense, getExpense, deleteExpense ,changeExpense} from '../controllers/expense.js';
 import { addIncome, getIncomes, deleteIncome, changeIncome } from '../controllers/income.js';
 import express from 'express';
 
@@ -12,7 +12,8 @@ router
     .get('/get-expenses', getExpense)
     .delete('/delete-expense/:id', deleteExpense)
     .get('/edit-expense/', changeIncome)
-    .patch('/edit-expense/:id',changeIncome);
+    .patch('/edit-income/:id',changeIncome)
+    .patch('/edit-expense/:id',changeExpense);
 export default router;
 
 
