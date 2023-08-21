@@ -1,4 +1,3 @@
-// const IncomeSchema= require("../models/IncomeModel")
 import IncomeSchema from "../models/IncomeModel.js"
 
 export const addIncome = async (req, res) => {
@@ -43,6 +42,29 @@ export const deleteIncome = async (req, res) =>{
     IncomeSchema.findByIdAndDelete(id)
         .then((income) =>{
             res.status(200).json({message: 'Income Deleted'})
+        })
+        .catch((err) =>{
+            res.status(500).json({message: 'Server Error'})
+        })
+}
+
+export const changeIncome = async (req, res) =>{
+    const {id} = req.params;
+    console.log(id);
+    const {title, amount, category, description, date}  = req.body
+
+    const updatedIncome  = {
+        title,
+        amount,
+        category,
+        description,
+        date
+    }
+    console.log(title);
+    IncomeSchema.findByIdAndUpdate(id,updatedIncome ,{ new: true })
+        .then((updatedIncome ) =>{
+            // const incomes =  IncomeSchema.find().sort({createdAt: -1})
+            res.status(200).json({message: 'Income Editted'})
         })
         .catch((err) =>{
             res.status(500).json({message: 'Server Error'})

@@ -1,7 +1,5 @@
-// const { addExpense, getExpense, deleteExpense } = require('../controllers/expense');
-// const { addIncome, getIncomes, deleteIncome } = require('../controllers/income');
 import { addExpense, getExpense, deleteExpense } from '../controllers/expense.js';
-import { addIncome, getIncomes, deleteIncome } from '../controllers/income.js';
+import { addIncome, getIncomes, deleteIncome, changeIncome } from '../controllers/income.js';
 import express from 'express';
 
 const router = express.Router();
@@ -12,8 +10,9 @@ router
     .delete('/delete-income/:id', deleteIncome)
     .post('/add-expense', addExpense)
     .get('/get-expenses', getExpense)
-    .delete('/delete-expense/:id', deleteExpense);
-
+    .delete('/delete-expense/:id', deleteExpense)
+    .get('/edit-expense/', changeIncome)
+    .patch('/edit-expense/:id',changeIncome);
 export default router;
 
 

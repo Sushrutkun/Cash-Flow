@@ -1,4 +1,3 @@
-// const mongoose = require('mongoose');
 import mongoose from 'mongoose';
 
 const IncomeSchema = new mongoose.Schema({
@@ -21,7 +20,8 @@ const IncomeSchema = new mongoose.Schema({
     date: {
         type: Date,
         required: true,
-        trim: true
+        trim: true,
+        // default:new Date()
     },
     category: {
         type: String,
@@ -32,7 +32,8 @@ const IncomeSchema = new mongoose.Schema({
         type: String,
         required: true,
         maxLength: 20,
-        trim: true
+        trim: true,
+        // default:"New Income"
     },
 }, {timestamps: true})
 

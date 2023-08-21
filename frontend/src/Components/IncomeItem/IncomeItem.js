@@ -15,7 +15,7 @@ function IncomeItem({
     editItem,
     indicatorColor,
     type,
-
+    // setEditi
 }) {
     // const [editi,setEditi]=useState(false);
     const categoryIcon = () =>{

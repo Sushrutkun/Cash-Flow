@@ -40,6 +40,7 @@ export const GlobalProvider = ({children}) => {
         // const json_data=await response.data;
         const random_data=response.data.find(item => item._id === id);
         // setIncomes()
+        // setEditi(false);
         setEditi(true);
         if (random_data) {
             console.log(random_data);

@@ -20,6 +20,7 @@ function Form() {
 
 
     const handleEdit = e => {
+
         if(editi){
             console.log(edit_data);
             const { title, amount, date, category, description } = edit_data;
@@ -31,6 +32,7 @@ function Form() {
                 category,
                 description
             });
+            // setEditi(false);
         }
     }
 
