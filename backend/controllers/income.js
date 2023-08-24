@@ -1,6 +1,7 @@
 import IncomeSchema from "../models/IncomeModel.js"
 
 export const addIncome = async (req, res) => {
+    // console.log(req)
     const {title, amount, category, description, date}  = req.body
 
     const income = IncomeSchema({
@@ -25,7 +26,6 @@ export const addIncome = async (req, res) => {
         res.status(500).json({message: 'Server Error'})
     }
 
-    console.log(income)
 }
 
 export const getIncomes = async (req, res) =>{

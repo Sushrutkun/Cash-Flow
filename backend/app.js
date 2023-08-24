@@ -3,6 +3,8 @@ import cors from 'cors'
 import {readdirSync} from 'fs'
 import db from './db/db.js'
 import 'dotenv/config';
+import userRouter from './routes/userRoutes.js';
+import { errorHandler, notFound } from './middlewares/errorMiddlewares.js';
 
 const app = express()
 
@@ -28,6 +30,9 @@ routeFiles.forEach(async (route) => {
     app.use('/api/v1', routeModule);
 });
 
+app.use('/api/v1/users', userRouter);
+app.use(notFound)
+app.use(errorHandler)
 
 
 const server = async() => {

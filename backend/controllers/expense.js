@@ -52,7 +52,7 @@ export const deleteExpense = async (req, res) =>{
 
 export const changeExpense = async (req, res) =>{
     const {id} = req.params;
-    console.log(id);
+    console.log(req.body);
     const {title, amount, category, description, date}  = req.body
 
     const updatedExpense  = {
