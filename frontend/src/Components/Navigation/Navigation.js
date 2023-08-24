@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import avatar from '../../img/avatar.png'
 import { signout } from '../../utils/Icons'
 import { menuItems } from '../../utils/menuItems'
+import { useNavigate } from 'react-router-dom'
 
 function Navigation({active, setActive}) {
-    
+    const navigate = useNavigate();
     return (
         <NavStyled>
             <div className="user-con">
@@ -27,8 +28,8 @@ function Navigation({active, setActive}) {
                     </li>
                 })}
             </ul>
-            <div className="bottom-nav">
-                <li>
+            <div className="bottom-nav" >
+                <li onClick={() => navigate('/login')}>
                     {signout} Sign Out
                     {/* create a href or button heer to signout  */}
                 </li>
@@ -94,6 +95,14 @@ const NavStyled = styled.nav`
             }
         }
     }
+
+    .bottom-nav{
+        cursor: pointer;
+        color: rgba(34, 34, 96, 0.6);
+    }
+    .bottom-nav:hover {
+        color: rgba(34, 34, 96, 1);
+      }
 
     .active{
         color: rgba(34, 34, 96, 1) !important;

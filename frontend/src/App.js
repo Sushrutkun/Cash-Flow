@@ -8,9 +8,14 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Income from './Components/Income/Income'
 import Expenses from './Components/Expenses/Expenses';
 import { useGlobalContext } from './context/globalContext';
+import SignupPage from './Components/SignUpLogin/signUp';
+import LoginPage from './Components/SignUpLogin/Login';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   const [active, setActive] = useState(1)
+  // const [signup, setSignup] = useState(true)
+  // const [login, setLogin] = useState(false)
 
   const global = useGlobalContext()
   // console.log(global);
@@ -38,12 +43,33 @@ function App() {
     <AppStyled bg={bg} className="App">
       {/* {orbMemo} */}
       {/* removing orb as animation in css is used in it of no use */}
-      <MainLayout>
-        <Navigation active={active} setActive={setActive} />
-        <main>
-          {displayData()}
-        </main>
-      </MainLayout>
+      {/* {(login=== false) ?
+        (<LoginPage/>)
+      :
+      (null)
+      } */}
+      {/* {
+        (login=== false) ?
+          (
+            // (signup=== false)?(<SignupPage/>):(<LoginPage/>)
+            <SignupPage/>
+          )
+          :
+          ( */}
+      <BrowserRouter>
+        <Routes>
+            <Route path='/signup'element={<SignupPage/>} />
+            <Route path='/login' element={<LoginPage/>}/>
+        </Routes>
+        <MainLayout>
+          <Navigation active={active} setActive={setActive} />
+          <main>
+            {displayData()}
+          </main>
+        </MainLayout>
+      </BrowserRouter>
+          {/* // )
+      } */}
     </AppStyled>
   );
 }
