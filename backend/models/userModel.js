@@ -5,13 +5,14 @@ const userSchema=mongoose.Schema({
         username:{
             type:String,
             require:true,
+            unique:true,
         },
         email:{
             type:String,
             require:true,
             unique:true,
         },
-        username:{
+        password:{
             type:String,
             require:true,
         },
@@ -26,18 +27,21 @@ const userSchema=mongoose.Schema({
     }
 );
 //bcrypt the password
-userSchema.pre('save',async function(next){
-    if(this.isModified('password')){
-        next();
+// will encrypt password everytime its saved
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) {
+      next();
     }
     const salt = await bcrypt.genSalt(10);
-    this.password=await bcrypt.hash(this.password,salt);
-})
+    this.password = await bcrypt.hash(this.password, salt);
+  });
+  
+//   const User = mongoose.model("User", userSchema);
 
 userSchema.methods.matchPassword = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword,this.password);
 };
 
-const user=mongoose.model("user",userSchema);
+const User=mongoose.model("user",userSchema);
 
-export default user;
+export default User;

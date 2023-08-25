@@ -43,19 +43,6 @@ function App() {
     <AppStyled bg={bg} className="App">
       {/* {orbMemo} */}
       {/* removing orb as animation in css is used in it of no use */}
-      {/* {(login=== false) ?
-        (<LoginPage/>)
-      :
-      (null)
-      } */}
-      {/* {
-        (login=== false) ?
-          (
-            // (signup=== false)?(<SignupPage/>):(<LoginPage/>)
-            <SignupPage/>
-          )
-          :
-          ( */}
       <BrowserRouter>
         <Routes>
             <Route path='/signup'element={<SignupPage/>} />

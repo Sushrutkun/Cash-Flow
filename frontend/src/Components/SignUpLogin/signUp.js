@@ -1,23 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import avatar from '../../img/avatar.png'
 import LoginPage from './Login';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 function SignupPage() {
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      const username = event.target.username.value;
-      const email = event.target.email.value;
-      const password = event.target.password.value;
-      
-      // You can perform signup logic here, such as sending data to a server
-      
-      // For this example, log the data to the console
-      console.log('Signup data:', { username, email, password });
-      event.target.reset();
-    };
+
+  const[username,setUsername] = useState("");
+  const[password,setPassword] = useState("");
+  const[email,setEmail] = useState("");
   const navigate = useNavigate();
+
+  const handleusernameChange = (e) =>{
+    setUsername(e.target.value)
+  }
+  const handlepasswordChange = (e) =>{
+    setPassword(e.target.value)
+  }
+  const handleemailChange = (e) =>{
+    setEmail(e.target.value)
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/v1/users",
+        {
+          username,
+          email,
+          password
+        },
+      )
+      console.log(data);
+      navigate("/")
+    } 
+    catch (err) {
+      console.log(err);
+      alert("Error Occured Change email id")
+    }
+  };
+ 
 
   return (
     <SignUpstyled bg="background-image-url">
@@ -28,9 +52,9 @@ function SignupPage() {
                 <img src={avatar} alt="Avatar" className="avatar" />
             </div>
             <div className="container">
-                <input type="text" placeholder="Enter Username" className='uname' required />
-                <input type="email" placeholder="Enter Email" className='uname' required />
-                <input type="password" placeholder="Enter Password" name="psw" required />
+                <input type="text" placeholder="Enter Username" className='uname' required value={username} onChange={(e)=>handleusernameChange(e)} />
+                <input type="email" placeholder="Enter Email" className='uname' required value={email} onChange={(e)=>handleemailChange(e)} />
+                <input type="password" placeholder="Enter Password" name="psw" required  value={password} onChange={(e)=>handlepasswordChange(e)}/>
                 <button type="submit">Signup</button>
                 <button type="button" onClick={() => navigate('/login')}>Login</button>
             </div>

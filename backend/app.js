@@ -31,8 +31,8 @@ routeFiles.forEach(async (route) => {
 });
 
 app.use('/api/v1/users', userRouter);
-app.use(notFound)
-app.use(errorHandler)
+// app.use(notFound)
+// app.use(errorHandler)
 
 
 const server = async() => {

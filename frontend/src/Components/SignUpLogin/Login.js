@@ -2,27 +2,49 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import avatar from '../../img/avatar.png'
 import SignupPage from './signUp';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
 
 function LoginPage() {
-    const[username,setUsername] = useState("");
-    const[password,setPassword] = useState("");
-    const[error,setError] = useState(false);
-    const[loading,setLoading] = useState(false);
-
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        console.log('login data:', { username, password });
-        
-        // Clear the form fields
-    e.target.reset();
-  };
-
+  const[username,setUsername] = useState("");
+  const[password,setPassword] = useState("");
+  const[error,setError] = useState(false);
+  const[loading,setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleusernameChange = (e) =>{
+    setUsername(e.target.value)
+  }
+  const handlepasswordChange = (e) =>{
+    setPassword(e.target.value)
+  }
+
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      try {
+        const { data } = await axios.post(
+          "http://localhost:5000/api/v1/users/login",
+          {
+            username,
+            password
+          },
+        )
+        console.log(data);
+        navigate("/")
+      } 
+      catch (err) {
+        console.log(err);
+        alert("Username or Password is Incorrect")
+      }
+
+      e.target.reset();
+    };
+    
+
 
   return (
   <LoginPagestyled bg="background-image-url">
@@ -33,10 +55,10 @@ function LoginPage() {
                 <img src={avatar} alt="Avatar" className="avatar" />
             </div>
             <div className="container">
-                <input type="text" placeholder="Enter Username" className='uname' required onChange={(e)=>setUsername(e.target.value)} />
-                <input type="password" placeholder="Enter Password" name="psw" required onChange={(e)=>setPassword(e.target.value)}/>
+                <input type="text" placeholder="Enter Username" className='uname' required value={username} onChange={(e)=>handleusernameChange(e)} />
+                <input type="password" placeholder="Enter Password" name="psw" required value={password} onChange={(e)=>handlepasswordChange(e)}/>
                 <button type="submit" >Login</button>
-                <button type="button" onClick={() => navigate('/signup')}>Signup</button>
+                <button type="button" onClick={() => navigate('/signup')}>Register here</button>
             </div>
         </div>
     </form>
