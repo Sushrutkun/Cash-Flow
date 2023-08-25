@@ -3,7 +3,7 @@ import axios from 'axios'
 import dotenv from 'dotenv'
 dotenv.config();
 
-const URL=process.env.REACT_URL_API;
+const URL=process.env.REACT_APP_URL_API;
 // const URL="";
 
 const BASE_URL = URL+"/api/v1/";
