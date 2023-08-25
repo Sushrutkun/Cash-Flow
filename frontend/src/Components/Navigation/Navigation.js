@@ -7,6 +7,11 @@ import { useNavigate } from 'react-router-dom'
 
 function Navigation({active, setActive}) {
     const navigate = useNavigate();
+    const userToken = localStorage.getItem("token");
+
+    const path = window.location.pathname;
+    console.log(path)
+
     return (
         <NavStyled>
             <div className="user-con">
@@ -28,12 +33,21 @@ function Navigation({active, setActive}) {
                     </li>
                 })}
             </ul>
-            <div className="bottom-nav" >
-                <li onClick={() => navigate('/login')}>
+            {   userToken ?
+                
+                <div className="bottom-nav" >
+                <li onClick={() => {navigate('/login'); localStorage.removeItem("token")}}>
                     {signout} Sign Out
                     {/* create a href or button heer to signout  */}
                 </li>
             </div>
+            :
+                path==='/signup' || path==='/login' ?
+               null:navigate('/login')
+               
+           
+
+            }
         </NavStyled>
     )
 }

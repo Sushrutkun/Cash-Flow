@@ -28,8 +28,6 @@ function SignupPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // const RQ_URL=(URL+"/api/v1/users");
-      // console.log(RQ_URL);
       const { data } = await axios.post(
         `${BASE_URL}users`,
         {
@@ -39,6 +37,8 @@ function SignupPage() {
         },
       )
       console.log(data);
+      localStorage.setItem("token", data.token)
+      // localStorage.setItem('token', token);
       navigate("/")
     } 
     catch (err) {

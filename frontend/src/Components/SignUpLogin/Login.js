@@ -36,6 +36,7 @@ function LoginPage() {
           },
         )
         console.log(data);
+        localStorage.setItem("token", data.token)
         navigate("/")
       } 
       catch (err) {

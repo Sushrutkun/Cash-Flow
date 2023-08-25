@@ -30,7 +30,7 @@ routeFiles.forEach(async (route) => {
     app.use('/api/v1', routeModule);
 });
 
-app.use('/api/v1/users', userRouter);
+app.use('/api/v1/users', userRouter); 
 // app.use(notFound)
 // app.use(errorHandler)
 
