@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 const URL=process.env.REACT_APP_URL_API;
 
-
+const BASE_URL = URL+"/api/v1/users/";
 
 function LoginPage() {
   const[username,setUsername] = useState("");
@@ -27,8 +27,9 @@ function LoginPage() {
       e.preventDefault();
 
       try {
+        // const RQ_URL=(URL+"/api/v1/users/login");
         const { data } = await axios.post(
-          URL+"/api/v1/users/login",
+          `${BASE_URL}login`,
           {
             username,
             password

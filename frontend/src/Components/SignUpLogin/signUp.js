@@ -5,6 +5,8 @@ import LoginPage from './Login';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 const URL=process.env.REACT_APP_URL_API;
+const BASE_URL = URL+"/api/v1/";
+
 
 function SignupPage() {
 
@@ -26,8 +28,10 @@ function SignupPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // const RQ_URL=(URL+"/api/v1/users");
+      // console.log(RQ_URL);
       const { data } = await axios.post(
-        URL+"/api/v1/users",
+        `${BASE_URL}users`,
         {
           username,
           email,
