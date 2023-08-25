@@ -4,6 +4,7 @@ import avatar from '../../img/avatar.png'
 import LoginPage from './Login';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+const URL=process.env.REACT_APP_URL_API;
 
 function SignupPage() {
 
@@ -26,7 +27,7 @@ function SignupPage() {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/users",
+        URL+"/api/v1/users",
         {
           username,
           email,

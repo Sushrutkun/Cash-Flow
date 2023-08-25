@@ -4,6 +4,7 @@ import avatar from '../../img/avatar.png'
 import SignupPage from './signUp';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+const URL=process.env.REACT_APP_URL_API;
 
 
 
@@ -27,7 +28,7 @@ function LoginPage() {
 
       try {
         const { data } = await axios.post(
-          "http://localhost:5000/api/v1/users/login",
+          URL+"/api/v1/users/login",
           {
             username,
             password
