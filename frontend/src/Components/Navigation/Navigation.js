@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import avatar from '../../img/avatar.png'
 import { signout } from '../../utils/Icons'
@@ -8,17 +8,23 @@ import { useNavigate } from 'react-router-dom'
 function Navigation({active, setActive}) {
     const navigate = useNavigate();
     const userToken = localStorage.getItem("token");
+    const userUsername = localStorage.getItem("username");
+    console.log(userUsername);
+    const userEmail = localStorage.getItem("email");
 
     const path = window.location.pathname;
     console.log(path)
+    // setUsername(userUsername)
+    // setEmail(userEmail)
+
 
     return (
         <NavStyled>
             <div className="user-con">
                 <img src={avatar} alt="" />
                 <div className="text">
-                    <h2>Mike</h2>
-                    <p>Cash Flow</p>
+                    <h2>{userUsername}</h2>
+                    <p>{userEmail}</p>
                 </div>
             </div>
             <ul className="menu-items">

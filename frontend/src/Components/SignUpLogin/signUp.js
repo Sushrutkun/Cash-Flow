@@ -38,6 +38,8 @@ function SignupPage() {
       )
       console.log(data);
       localStorage.setItem("token", data.token)
+      localStorage.setItem("username", data.username)
+      localStorage.setItem("email", data.email)
       // localStorage.setItem('token', token);
       navigate("/")
     } 
@@ -55,7 +57,7 @@ function SignupPage() {
                 <img src={avatar} alt="Avatar" className="avatar" />
             </div>
             <div className="container">
-                <input type="text" placeholder="Enter Username" className='uname' required value={username} onChange={(e)=>handleusernameChange(e)} />
+                <input type="text" placeholder="Enter Username" className='uname' required maxlength="11" value={username} onChange={(e)=>handleusernameChange(e)} />
                 <input type="email" placeholder="Enter Email" className='uname' required value={email} onChange={(e)=>handleemailChange(e)} />
                 <input type="password" placeholder="Enter Password" name="psw" required  value={password} onChange={(e)=>handlepasswordChange(e)}/>
                 <button type="submit">Signup</button>
