@@ -42,8 +42,6 @@ function SignupPage() {
       alert("Error Occured Change email id")
     }
   };
- 
-
   return (
     <SignUpstyled bg="background-image-url">
       <form onSubmit={handleSubmit}>
