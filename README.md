@@ -23,17 +23,17 @@ Follow these instructions to set up and run the Cashflow web app on your local m
 Clone the repository to your local machine:
 
 ```bash
-   git clone https://github.com/Sushrutkun/Revisit
+   git clone https://github.com/Sushrutkun/Cash-Flow
 ```
-Then go to the Server and install dependencies
+Then go to the Backend and install dependencies
 ```bash
-cd server
+cd backend
 npm install 
 ```
 
-Then go to the Client and install dependencies
+Then go to the Frontend and install dependencies
 ```bash
-cd client
+cd frontend
 npm install 
 ```
 
@@ -42,11 +42,11 @@ then run the server environment by creating the .env file in server folder and a
 MONGODB_CONNECTION_URL= "{Your MONGO_DB URL}"  
 Open new terminal
 ```bash
-cd server
+cd backend
 npm run start 
 ```
 Open new terminal
 ```bash
-cd client
+cd frontend
 npm start 
 ```
