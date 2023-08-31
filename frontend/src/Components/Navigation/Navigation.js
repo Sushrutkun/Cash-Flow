@@ -42,7 +42,7 @@ function Navigation({active, setActive}) {
             {   userToken ?
                 
                 <div className="bottom-nav" >
-                <li onClick={() => {navigate('/login'); localStorage.removeItem("token")}}>
+                <li onClick={() => {navigate('/login'); localStorage.removeItem("token"); localStorage.removeItem("username");localStorage.removeItem("email")}}>
                     {signout} Sign Out
                     {/* create a href or button heer to signout  */}
                 </li>
@@ -50,9 +50,6 @@ function Navigation({active, setActive}) {
             :
                 path==='/signup' || path==='/login' ?
                null:navigate('/login')
-               
-           
-
             }
         </NavStyled>
     )
