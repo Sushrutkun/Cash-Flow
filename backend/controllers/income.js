@@ -1,11 +1,15 @@
 import IncomeSchema from "../models/IncomeModel.js"
+import User from "../models/userModel.js"
 
 export const addIncome = async (req, res) => {
     // console.log(req)
-    const {title, amount, category, description, date}  = req.body
-
+    const {username, amount, category, description, date,guess}  = req.body
+    console.log(username);
+    const userFound =await User.findOne({"username":username});
+    // console.log(userFound);
     const income = IncomeSchema({
-        title,
+        user:userFound._id,
+        title:guess,
         amount,
         category,
         description,
@@ -21,7 +25,9 @@ export const addIncome = async (req, res) => {
             return res.status(400).json({message: 'Amount must be a positive number!'})
         }
         await income.save()
-        res.status(200).json({message: 'Income Added'})
+        // res.status(200).json({message: 'Income Added'})
+        res.status(200).json(income)
+        console.log(income);
     } catch (error) {
         res.status(500).json({message: 'Server Error'})
     }
@@ -29,8 +35,10 @@ export const addIncome = async (req, res) => {
 }
 
 export const getIncomes = async (req, res) =>{
+    const {username} = req.query;
+    const userFound = await User.findOne({"username":username});
     try {
-        const incomes = await IncomeSchema.find().sort({createdAt: -1})
+        const incomes = await IncomeSchema.find({"user":userFound._id}).sort({createdAt: -1})
         res.status(200).json(incomes)
     } catch (error) {
         res.status(500).json({message: 'Server Error'})

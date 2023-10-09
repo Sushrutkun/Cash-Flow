@@ -5,14 +5,23 @@ import History from '../../History/History';
 import { InnerLayout } from '../../styles/Layouts';
 import { dollar } from '../../utils/Icons';
 import Chart from '../Chart/Chart';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
     const {totalExpenses,incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } = useGlobalContext()
-
+    const navigate = useNavigate();
+    function redirect ()
+    {
+        if(localStorage.length===0)
+        {
+            navigate('/login')
+        }
+    }
     useEffect(() => {
+        redirect()
         getIncomes()
         getExpenses()
-    }, [])
+    }, [getIncomes, getExpenses])
 
     return (
         <DashboardStyled>

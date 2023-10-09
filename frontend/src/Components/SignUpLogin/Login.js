@@ -60,7 +60,7 @@ function LoginPage() {
                 <img src={avatar} alt="Avatar" className="avatar" />
             </div>
             <div className="container">
-                <input type="text" placeholder="Enter Username" className='uname' required maxlength="11" value={username} onChange={(e)=>handleusernameChange(e)} />
+                <input type="text" placeholder="Enter Username" className='uname' required value={username} onChange={(e)=>handleusernameChange(e)} />
                 <input type="password" placeholder="Enter Password" name="psw" required value={password} onChange={(e)=>handlepasswordChange(e)}/>
                 <button type="submit" >Login</button>
                 <button type="button" onClick={() => navigate('/signup')}>Register here</button>

@@ -1,11 +1,12 @@
 // const ExpenseSchema = require("../models/ExpenseModel")
 import ExpenseSchema from "../models/ExpenseModel.js"
-
+import User from "../models/userModel.js"
 
 export const addExpense = async (req, res) => {
-    const {title, amount, category, description, date}  = req.body
-
+    const {username,title, amount, category, description, date}  = req.body;
+    const userFound = await User.findOne({"username":username});
     const income = ExpenseSchema({
+        user:userFound._id,
         title,
         amount,
         category,
@@ -31,8 +32,10 @@ export const addExpense = async (req, res) => {
 }
 
 export const getExpense = async (req, res) =>{
+    const {username} = req.query;
+    const userFound = await User.findOne({"username":username});
     try {
-        const incomes = await ExpenseSchema.find().sort({createdAt: -1})
+        const incomes = await ExpenseSchema.find({"user":userFound._id}).sort({createdAt: -1})
         res.status(200).json(incomes)
     } catch (error) {
         res.status(500).json({message: 'Server Error'})

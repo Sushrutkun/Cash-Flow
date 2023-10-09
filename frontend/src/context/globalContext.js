@@ -20,18 +20,31 @@ export const GlobalProvider = ({children}) => {
     const [edit_data, setEditData] = useState(null);
     const [edite,setEdite]=useState(false)
     const [edit_data_e, setEditDatae] = useState(null);
-
+    const username = localStorage.getItem("username");
+    // alert(username);
     //calculate incomes
     const addIncome = async (income) => {
-        const response = await axios.post(`${BASE_URL}add-income`, income)
-            .catch((err) =>{
-                setError(err.response.data.message)
-            })
+        const {title, amount, category, description, date}  = income
+        console.log(username,title, amount, category, description, date);
+        const response = await axios.post(`${BASE_URL}add-income`, 
+        {
+            username,
+            title,
+            amount,
+            category,
+            description,
+            date,
+            guess: "guess"
+        })
+        .catch((err) =>{
+            setError(err.response.data.message)
+        })
+        console.log(response); 
         getIncomes()
     }
 
     const getIncomes = async () => {
-        const response = await axios.get(`${BASE_URL}get-incomes`)
+        const response = await axios.get(`${BASE_URL}get-incomes`,{params:{"username":username}})
         setIncomes(response.data)
         console.log(response.data)
     }
@@ -93,7 +106,18 @@ export const GlobalProvider = ({children}) => {
 
     //calculate incomes
     const addExpense = async (income) => {
-        const response = await axios.post(`${BASE_URL}add-expense`, income)
+        const {title, amount, category, description, date}  = income;
+        // console.log(username,title, amount, category, description, date);
+        const response = await axios.post(`${BASE_URL}add-expense`, 
+        {
+            username,
+            title,
+            amount,
+            category,
+            description,
+            date,
+            guess: "guess"
+        })
             .catch((err) =>{
                 setError(err.response.data.message)
             })
@@ -101,7 +125,7 @@ export const GlobalProvider = ({children}) => {
     }
 
     const getExpenses = async () => {
-        const response = await axios.get(`${BASE_URL}get-expenses`)
+        const response = await axios.get(`${BASE_URL}get-expenses`,{params:{"username":username}})
         setExpenses(response.data)
         console.log(response.data)
     }

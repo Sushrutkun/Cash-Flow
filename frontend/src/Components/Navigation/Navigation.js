@@ -48,8 +48,9 @@ function Navigation({active, setActive}) {
                 </li>
             </div>
             :
-                path==='/signup' || path==='/login' ?
-               null:navigate('/login')
+            //     path==='/signup' || path==='/login' ?
+            //    null:navigate('/login')
+            null
             }
         </NavStyled>
     )

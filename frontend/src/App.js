@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from "styled-components";
 import bg from './img/bg.png'
 import {MainLayout} from './styles/Layouts'
@@ -18,7 +18,14 @@ function App() {
   // const [login, setLogin] = useState(false)
 
   const global = useGlobalContext()
-  // console.log(global);
+  // console.log(global);\
+  
+const {totalExpenses,incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } = useGlobalContext()
+
+useEffect(() => {
+    getIncomes()
+    getExpenses()
+}, [getIncomes, getExpenses])
 
   const displayData = () => {
     switch(active){
