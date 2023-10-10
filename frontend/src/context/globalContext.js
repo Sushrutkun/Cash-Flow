@@ -34,7 +34,6 @@ export const GlobalProvider = ({children}) => {
             category,
             description,
             date,
-            guess: "guess"
         })
         .catch((err) =>{
             setError(err.response.data.message)
@@ -55,27 +54,47 @@ export const GlobalProvider = ({children}) => {
     }
 
     const editIncome = async (id) => {
-        const response = await axios.get(`${BASE_URL}get-incomes`)
-        const random_data=response.data.find(item => item._id === id);
-        setEditi(true);
-        if (random_data) {
-            console.log(random_data);
-            setEditData(random_data);
-        } else {
-        console.log("Data with the specified ID not found.");
+        try{
+            const response = await axios.get(`${BASE_URL}get-incomes`,{params:{"username":username}})
+            const random_data=response.data.find(item => item._id === id);
+            setEditi(true);
+            if (random_data) {
+                console.log(random_data);
+                setEditData(random_data);
+            } else {
+            console.log("Data with the specified ID not found.");
+            }
+        }
+        catch(err){
+            console.log(err);
         }
     }
 
     const editExpense = async (id) => {
-        const response = await axios.get(`${BASE_URL}get-expenses`)
-        const random_data=response.data.find(item => item._id === id);
-        setEdite(true);
-        if (random_data) {
-            console.log(random_data);
-            setEditDatae(random_data);
-        } else {
-        console.log("Data with the specified ID not found.");
+        try{
+            const response = await axios.get(`${BASE_URL}get-expenses`,{params:{"username":username}})
+            const random_data=response.data.find(item => item._id === id);
+            setEdite(true);
+            if (random_data) {
+                console.log(random_data);
+                setEditDatae(random_data);
+            } else {
+            console.log("Data with the specified ID not found.");
+            }
         }
+        catch(err){
+
+            console.log(err);
+        }
+        // const response = await axios.get(`${BASE_URL}get-expenses`)
+        // const random_data=response.data.find(item => item._id === id);
+        // setEdite(true);
+        // if (random_data) {
+        //     console.log(random_data);
+        //     setEditDatae(random_data);
+        // } else {
+        // console.log("Data with the specified ID not found.");
+        // }
     }
 
     const changeIncome = async(id,income) =>{
@@ -116,7 +135,6 @@ export const GlobalProvider = ({children}) => {
             category,
             description,
             date,
-            guess: "guess"
         })
             .catch((err) =>{
                 setError(err.response.data.message)

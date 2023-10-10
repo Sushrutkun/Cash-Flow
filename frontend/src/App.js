@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import bg from './img/bg.png'
-import {MainLayout} from './styles/Layouts'
+import { MainLayout } from './styles/Layouts'
 // import Orb from './Components/Orb/Orb'
 import Navigation from './Components/Navigation/Navigation'
 import Dashboard from './Components/Dashboard/Dashboard';
@@ -17,27 +17,22 @@ function App() {
   // const [signup, setSignup] = useState(true)
   // const [login, setLogin] = useState(false)
 
-  const global = useGlobalContext()
+  // const global = useGlobalContext()
   // console.log(global);\
-  
-const {totalExpenses,incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } = useGlobalContext()
 
-useEffect(() => {
-    getIncomes()
-    getExpenses()
-}, [getIncomes, getExpenses])
+  // const {totalExpenses,incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } = useGlobalContext()
 
   const displayData = () => {
-    switch(active){
+    switch (active) {
       case 1:
         return <Dashboard />
       case 2:
         return <Dashboard />
       case 3:
         return <Income />
-      case 4: 
+      case 4:
         return <Expenses />
-      default: 
+      default:
         return <Dashboard />
     }
   }
@@ -52,24 +47,26 @@ useEffect(() => {
       {/* removing orb as animation in css is used in it of no use */}
       <BrowserRouter>
         <Routes>
-            <Route path='/signup'element={<SignupPage/>} />
-            <Route path='/login' element={<LoginPage/>}/>
+          <Route path='/signup' element={<SignupPage />} />
+          <Route path='/login' element={<LoginPage />} />
         </Routes>
         <MainLayout>
           <Navigation active={active} setActive={setActive} />
           <main>
-            {displayData()}
+            <Routes>
+              <Route path='/' element={displayData()} />
+            </Routes>
           </main>
         </MainLayout>
       </BrowserRouter>
-          {/* // )
+      {/* // )
       } */}
     </AppStyled>
   );
 }
 
 const AppStyled = styled.div
-`
+  `
   height: 100vh;
   background-image: url(${props => props.bg});
   position: relative;

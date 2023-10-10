@@ -2,14 +2,12 @@ import IncomeSchema from "../models/IncomeModel.js"
 import User from "../models/userModel.js"
 
 export const addIncome = async (req, res) => {
-    // console.log(req)
-    const {username, amount, category, description, date,guess}  = req.body
+    const {username,title, amount, category, description, date}  = req.body
     console.log(username);
     const userFound =await User.findOne({"username":username});
-    // console.log(userFound);
     const income = IncomeSchema({
         user:userFound._id,
-        title:guess,
+        title,
         amount,
         category,
         description,
@@ -25,8 +23,8 @@ export const addIncome = async (req, res) => {
             return res.status(400).json({message: 'Amount must be a positive number!'})
         }
         await income.save()
-        // res.status(200).json({message: 'Income Added'})
-        res.status(200).json(income)
+        res.status(200).json({message: 'Income Added'})
+        // res.status(200).json(income)
         console.log(income);
     } catch (error) {
         res.status(500).json({message: 'Server Error'})
@@ -70,10 +68,12 @@ export const changeIncome = async (req, res) =>{
     }
     console.log(title);
     IncomeSchema.findByIdAndUpdate(id,updatedIncome ,{ new: true })
-        .then((updatedIncome ) =>{
+        .then((updatedIncome) =>{
             res.status(200).json({message: 'Income Editted'})
+            console.log(updatedIncome);
         })
         .catch((err) =>{
             res.status(500).json({message: 'Server Error'})
+            console.log(err);
         })
 }

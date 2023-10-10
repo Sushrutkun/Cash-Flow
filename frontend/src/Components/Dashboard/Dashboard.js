@@ -21,7 +21,7 @@ function Dashboard() {
         redirect()
         getIncomes()
         getExpenses()
-    }, [getIncomes, getExpenses])
+    }, [])
 
     return (
         <DashboardStyled>

@@ -20,7 +20,7 @@ function ExpenseForm() {
     const { title, amount, date, category,description} = inputState;
 
 
-    const handleEdit = e => {
+    const handleEdit = (e) => {
 
         if(edite){
             console.log(edit_data_e);
